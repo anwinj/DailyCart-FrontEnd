@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg sticky-top bg-dark p-2  ">
+    <div class="container-fluid d-flex justify-content-between ">
+      <div>
+          <img width="40px" src="https://cdn.freebiesupply.com/logos/large/2x/shopify-logo-png-transparent.png" alt="">   
+          <a class="navbar-brand text-light ms-3" routerLink="">Daily Cart</a>
+      </div>
+      <div>
+        <form class="d-flex" role="search">
+            <input (keyup)="getSearchTerm($event)" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-success" type="submit">Search</button>
+        </form>
+      </div>
+      <div class="me-3 d-flex ">
+        <button class="btn btn-danger me-4 " routerLink="/wishlist"><i class="fa-solid fa-heart me-2"></i>Wishlist <span>{{wishlistCount}}</span> </button>
+        <button class="btn btn-info" routerLink="/cart"><i class="fa-solid fa-cart-shopping me-2"></i>Cart <span>{{cartCount}}</span></button>
+        <button *ngIf="!loginUsername" class="btn btn-light ms-3" routerLink="/login"><i class="fa-solid fa-user me-3"></i>Login</button>
+        <div *ngIf="loginUsername" class="ms-4 d-flex justify-content-center align-items-center ">
+          <button (click)="logout()" class="btn btn-light"><i class="fa-solid fa-right-from-bracket me-2"></i>Logout</button>
+          <button class=" btn ms-2 bg-dark text-light"><i class="fa-solid fa-user me-2"></i>{{loginUsername}}</button>
+        </div>
+      </div>
+    </div>
+  </nav>

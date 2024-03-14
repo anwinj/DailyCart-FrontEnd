@@ -1,0 +1,28 @@
+<app-header></app-header>
+<div class="d-flex justify-content-center  align-items-center p-5 ">
+    <div class="row  rounded-5 w-75 ">
+        <div class="col-lg-6 d-flex flex-column  justify-content-center align-item-center">
+            <h2 class="mb-3">Login</h2>
+            <p class="mb-4">Please enter your email and password to login</p>
+            <form [formGroup]="loginForm">
+                <div class="form-floating mb-3">
+                    <input  name="email" formControlName="email" type="email" class="form-control w-75" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Email address</label>
+                </div>
+                <div class="form-floating">
+                    <input  name="password" formControlName="password"  type="password" class="form-control w-75" id="floatingPassword" placeholder="Password">
+                    <label for="floatingPassword">Password</label>
+                </div>
+            </form>
+            <div class="mt-4 mb-5">
+                <button (click)="login()" class="btn btn-success px-3">Login</button>
+            </div>
+            <p>Need to register ? click here to <a routerLink="/register">register</a></p>
+        </div>
+        <div class="col-lg-6">
+            <img height="500px" src="https://cdni.iconscout.com/illustration/premium/thumb/login-page-4468581-3783954.png?f=webp" alt="">
+        </div>
+    </div>
+</div>
+<!-- {{loginForm.value.email}}
+{{loginForm.value.password}} -->

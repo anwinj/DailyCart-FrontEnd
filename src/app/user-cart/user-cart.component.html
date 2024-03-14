@@ -1,0 +1,73 @@
+<app-header></app-header>
+<div style="height:fit-content ; width: 99%;" class="mb-5">
+    <div class="p-3">
+        <h2 class="text-">Your Cart</h2>
+    </div>
+
+    <div class="d-flex flex-column justify-content-center align-items-center " *ngIf="allProducts.length==0">
+        <img width="600px" src="https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-5521508-4610092.png" alt="">
+        <h3>Your Cart is empty</h3>
+    </div>
+    
+    <div *ngIf="allProducts.length!=0" class="row p-4">
+        <div class="col-lg-8">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Product</th>
+                        <th>Image</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>...</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of allProducts; let i=index">
+                        <td>{{i+1}}</td>
+                        <td>{{product.title.slice(0,25)}}...</td>
+                        <td><img width="80px" height="100px" [src]="product.image" alt=""></td>
+                        <td>
+                            <div class="d-flex">
+                                <button (click)="decrementQuantity(product._id)" class="btn fw-bolder">-</button>
+                                <input style="width: 50px" [value]="product.quantity" type="text" class="form-control" readonly>
+                                <button (click)="incrementQuantity(product._id)" class="btn fw-bolder">+</button>
+                            </div>
+                        </td>
+                        <td>$ {{product.totalPrice}}</td>
+                        <td><button (click)="deleteCart(product._id)" class="btn"><i class="fa-solid fa-trash fa-lg text-danger"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="float-end mt-3">
+                <button (click)="emptyCart()" class="btn btn-secondary me-2">EMPTY CART</button>
+                <button routerLink="/" class="btn btn-success">SHOP MORE</button>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="border rounded p-3">
+                <h3>Total: <span class="text-danger">$ {{cartTotalPrice}} </span></h3>
+                <div *ngIf="!couponStatus" class="text-center mt-4">
+                    <button (click)="getCoupon()" class="btn btn-info">Click here to view coupons</button>
+                </div>
+                <div *ngIf="couponStatus" class="d-flex justify-content-evenly mt-3">
+                    <ng-container *ngIf="cartTotalPrice>=50 && cartTotalPrice<=250 && !couponClickStatus">
+                        <img (click)="handleDiscount(5)" width="100px" height="80px" src="https://freepngimg.com/save/51699-coupon-hd-png-file-hd/435x261" alt="">
+                    </ng-container>
+                    <ng-container *ngIf="cartTotalPrice>250 && cartTotalPrice<=500 && !couponClickStatus">
+                        <img (click)="handleDiscount(20)" width="100px" height="80px" src="https://i.pinimg.com/originals/84/53/d0/8453d04034dcc0d4abaca83cda972b4d.png" alt="">
+                    </ng-container>
+                    <ng-container *ngIf="cartTotalPrice>500 && !couponClickStatus">
+                        <img (click)="handleDiscount(50)" width="60px" src="https://static.vecteezy.com/system/resources/previews/024/976/257/original/discount-sticker-design-super-offer-a-fifty-percent-discount-tag-with-black-and-red-color-super-sale-discount-coupon-free-png.png" alt="">
+                    </ng-container> 
+                </div>
+                <hr class="mt-4" />
+                <div class="d-grid">
+                    <button (click)="checkout()" class="btn btn-success">Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
